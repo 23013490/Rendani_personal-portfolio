@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Rendani Mukwevho Portfolio</title>
+    <meta
+      name="description"
+      content="Personal portfolio showcasing projects, skills and contact."
+    />
+
+    <style>
+      :root {
+        --bg: #0f1724;
+        --card: #0b1220;
+        --muted: #9aa4b2;
+        --accent: #7c3aed;
+        --glass: rgba(255, 255, 255, 0.04);
+        --radius: 14px;
+        --maxw: 1100px;
+        --gap: 20px;
+        --ff-sans: Inter, system-ui, -apple-system, Segoe UI, Roboto,
+          "Helvetica Neue", Arial;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        height: 100%;
+      }
+      body {
+        margin: 0;
+        font-family: var(--ff-sans);
+        background: linear-gradient(180deg, #071025 0%, var(--bg) 100%);
+        color: #e6eef6;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        padding: 32px;
+        display: flex;
+        justify-content: center;
+      }
+
+      .container {
+        width: 100%;
+        max-width: var(--maxw);
+      }
+      header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 28px;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .logo {
+        width: 48px;
+        height: 48px;
+        border-radius: 12px;
+        background: linear-gradient(135deg, var(--accent), #4f46e5);
+        display: grid;
+        place-items: center;
+        font-weight: 700;
+      }
+      nav a {
+        color: var(--muted);
+        text-decoration: none;
+        margin-left: 18px;
+      }
+      nav a:hover {
+        color: #fff;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: 1fr 360px;
+        gap: var(--gap);
+      }
+      @media (max-width: 900px) {
+        .grid {
+          grid-template-columns: 1fr;
+        }
+        .aside {
+          order: 2;
+        }
+      }
+
+      .card {
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.02),
+          transparent
+        );
+        padding: 22px;
+        border-radius: var(--radius);
+        box-shadow: 0 4px 18px rgba(2, 6, 23, 0.6);
+        backdrop-filter: blur(6px);
+      }
+
+      /* Hero */
+      .hero {
+        display: flex;
+        gap: 22px;
+        align-items: center;
+      }
+      .hero .intro {
+        flex: 1;
+      }
+      .title {
+        font-size: 32px;
+        margin: 0 0 8px;
+      }
+      .subtitle {
+        margin: 0 0 18px;
+        color: var(--muted);
+      }
+      .cta {
+        display: flex;
+        gap: 12px;
+      }
+      .btn {
+        padding: 10px 14px;
+        border-radius: 10px;
+        background: var(--accent);
+        color: white;
+        text-decoration: none;
+        font-weight: 600;
+      }
+      .btn.ghost {
+        background: transparent;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        color: var(--muted);
+      }
+
+      .avatar {
+        width: 160px;
+        height: 160px;
+        border-radius: 18px;
+        overflow: hidden;
+        flex-shrink: 0;
+        box-shadow: 0 6px 30px rgba(0, 0, 0, 0.6);
+      }
+      .avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      /* Projects */
+      .projects {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+      }
+      @media (max-width: 700px) {
+        .projects {
+          grid-template-columns: 1fr;
+        }
+      }
+      .project {
+        padding: 14px;
+        border-radius: 12px;
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.01),
+          transparent
+        );
+        border: 1px solid rgba(255, 255, 255, 0.03);
+      }
+      .project h4 {
+        margin: 0 0 6px;
+      }
+      .tags {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+      .tag {
+        font-size: 12px;
+        color: var(--muted);
+        padding: 6px 8px;
+        border-radius: 8px;
+        background: var(--glass);
+      }
+
+      /* Skills */
+      .skill {
+        display: flex;
+        justify-content: space-between;
+        margin: 8px 0;
+      }
+      .bar {
+        height: 10px;
+        width: 60%;
+        background: rgba(255, 255, 255, 0.06);
+        border-radius: 8px;
+        overflow: hidden;
+      }
+      .bar > i {
+        display: block;
+        height: 100%;
+        background: linear-gradient(90deg, var(--accent), #06b6d4);
+      }
+
+      /* Contact */
+      form {
+        display: grid;
+        gap: 10px;
+      }
+      input,
+      textarea {
+        width: 100%;
+        padding: 10px;
+        border-radius: 10px;
+        border: 1px solid rgba(255, 255, 255, 0.04);
+        background: transparent;
+        color: inherit;
+      }
+      textarea {
+        min-height: 110px;
+      }
+
+      footer {
+        margin-top: 22px;
+        color: var(--muted);
+        font-size: 13px;
+        text-align: center;
+      }
+
+      /* micro interactions */
+      .floating {
+        transition: transform 0.28s ease, box-shadow 0.28s;
+      }
+      .floating:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 20px 40px rgba(2, 6, 23, 0.6);
+      }
+
+      /* small helper */
+      .muted {
+        color: var(--muted);
+      }
+
+      /* Fade-in animations */
+      .fade-in {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.6s ease, transform 0.6s ease;
+      }
+      .fade-in.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <div class="brand">
+          <div class="logo">Y</div>
+          <div>
+            <div style="font-weight: 700">Rendani Andrew Mukwevho</div>
+            <div class="muted" style="font-size: 12px">
+              Frontend Developer • Designer • Problem Solver
+            </div>
+          </div>
+        </div>
+        <nav>
+          <a href="#projects">Projects</a>
+          <a href="#skills">Skills</a>
+          <a href="contact.html">Contact</a>
+          <a href="https://github.com/23013490" target="_blank" rel="noopener noreferrer">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+            </svg>
+          </a>
+          <a href="#" id="darkToggle">Toggle</a>
+        </nav>
+      </header>
+
+      <main class="grid">
+        <section>
+          <div class="card hero floating fade-in">
+            <div style="display: flex; flex-direction: column; gap: 14px">
+              <div
+                style="
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+                  gap: 12px;
+                  flex-wrap: wrap;
+                "
+              >
+                <div class="intro">
+                  <h1 class="title">My name is Rendani Mukwevho</h1>
+                  <p class="subtitle">
+                    I build beautiful, accessible web experiences using HTML,
+                    CSS and JavaScript. I love turning ideas into working
+                    products.
+                  </p>
+                  <div class="cta">
+                    <a class="btn" href="#projects">View Projects</a>
+                    <a class="btn ghost" href="contact.html">Hire me</a>
+                  </div>
+                </div>
+
+                <div class="avatar">
+                  <img src="IMG_20230927_032631_395.jpg" alt="Your avatar" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="projects" style="margin-top: 18px" class="card fade-in">
+            <h3 style="margin-top: 0">Selected Projects</h3>
+            <div class="projects">
+              <article class="project floating">
+                <h4>Project One</h4>
+                <p class="muted" style="font-size: 13px; margin: 6px 0">
+                  I created a student accomodation system were users are allowed
+                  to login and book the residence at univen.
+                </p>
+                <div class="tags">
+                  <span class="tag">HTML</span><span class="tag">CSS</span
+                  ><span class="tag">JavaScript</span>
+                </div>
+                <div style="margin-top: 10px">
+                  <a class="btn" href="#">Live</a>
+                </div>
+              </article>
+
+              <article class="project floating">
+                <h4>Project Two</h4>
+                <p class="muted" style="font-size: 13px; margin: 6px 0">
+                  I used java swing to create amazing userinterface for grade
+                  checking system and calculation.
+                </p>
+                <div class="tags">
+                  <span class="tag">java</span
+                  ><span class="tag">java swing</span>
+                </div>
+                <div style="margin-top: 10px">
+                  <a class="btn ghost" href="#">Code</a>
+                </div>
+              </article>
+
+              <article class="project floating">
+                <h4>Project Three</h4>
+                <p class="muted" style="font-size: 13px; margin: 6px 0">
+                  Design database, connect front end and backend for e-commerce
+                  atchar selling website to student.
+                </p>
+                <div class="tags">
+                  <span class="tag">UI</span
+                  ><span class="tag">Accessibility</span>
+                </div>
+                <div style="margin-top: 10px">
+                  <a class="btn" href="#"> more content.</a>
+                </div>
+              </article>
+
+              <article class="project floating">
+                <h4>Project Four</h4>
+                <p class="muted" style="font-size: 13px; margin: 6px 0">
+                  I created a pine city zoo map,calculator using Html,Css,and
+                  JavaScript.
+                </p>
+
+                <div style="margin-top: 10px">
+                  <a class="btn ghost" href="#">Details</a>
+                </div>
+              </article>
+            </div>
+          </div>
+
+          <div id="skills" class="card" style="margin-top: 18px">
+            <h3 style="margin-top: 0">Skills</h3>
+            <div style="display: flex; gap: 18px; flex-wrap: wrap">
+              <div style="flex: 1; min-width: 220px">
+                <div class="skill">
+                  <strong>HTML & CSS</strong><span>70%</span>
+                </div>
+                <div class="bar"><i style="width: 90%"></i></div>
+
+<div style="flex: 1; min-width: 220px">
+                <div class="skill">
+                  <strong>JAVA</strong><span>70%</span>
+                </div>
+                <div class="bar"><i style="width: 90%"></i></div>
+
+                <div style="flex: 1; min-width: 220px">
+                <div class="skill">
+                  <strong>C++</strong><span>70%</span>
+                </div>
+                <div class="bar"><i style="width: 90%"></i></div>
+
+
+
+
+
+                <div class="skill">
+                  <strong>JavaScript</strong><span>70%</span>
+                </div>
+                <div class="bar"><i style="width: 65%"></i></div>
+
+                
+              <div style="flex: 1; min-width: 220px">
+                <div class="skill">
+                  <strong>UI / UX</strong><span>80%</span>
+                </div>
+                <div class="bar"><i style="width: 80%"></i></div>
+
+                <div class="skill">
+                  <strong>Testing</strong><span>60%</span>
+                </div>
+                <div class="bar"><i style="width: 60%"></i></div>
+
+                <div class="skill">
+                  <strong>Backend basics</strong><span>55%</span>
+                </div>
+                <div class="bar"><i style="width: 55%"></i></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <aside class="aside">
+          <div class="card floating fade-in">
+            <h3 style="margin-top: 0">Contact</h3>
+            <p class="muted">
+              I'm open to freelancing and full-time roles. Send a message and
+              I'll get back to you within a few days.
+            </p>
+
+            <form id="contactForm" onsubmit="return handleSubmit(event)">
+              <input id="name" placeholder="Your name" required />
+              <input
+                id="email"
+                type="email"
+                placeholder="Your email"
+                required
+              />
+              <textarea
+                id="message"
+                placeholder="Message (brief)"
+                required
+              ></textarea>
+              <button class="btn" type="submit">Send message</button>
+            </form>
+
+            <hr
+              style="
+                margin: 14px 0;
+                border: none;
+                border-top: 1px solid rgba(255, 255, 255, 0.03);
+              "
+            />
+            <div style="display: flex; flex-direction: column; gap: 10px">
+              <div>
+                <strong>Location</strong>
+                <div class="muted">Thohoyandou, South Africa</div>
+              </div>
+              <div>
+                <strong>Email</strong>
+                <div class="muted">rn.mukwevho@gmail.com</div>
+              </div>
+              <div>
+                <strong>Resume</strong>
+                <div><a class="btn ghost" href="#">Download</a></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card fade-in" style="margin-top: 18px">
+            <h4 style="margin: 0 0 8px">Quick Bio</h4>
+            <p class="muted" style="font-size: 14px">
+               I am inspiring WebDeveloper who is willing to make an impact in creating a nice userinterface for users and solving problems by using modern technologies.
+            </p>
+          </div>
+        </aside>
+      </main>
+
+      <footer>
+        Built with ♥ —
+        <span class="muted">Rendani Mukwevho • © <span id="year"></span></span>
+      </footer>
+    </div>
+
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+
+      // Dark/Light toggle (simple)
+      const toggle = document.getElementById("darkToggle");
+      toggle.addEventListener("click", (e) => {
+        e.preventDefault();
+        document.documentElement.style.setProperty(
+          "--bg",
+          getComputedStyle(document.documentElement)
+            .getPropertyValue("--bg")
+            .trim() === "#fff"
+            ? "#0f1724"
+            : "#fff"
+        );
+        // quick toggle for text color
+        if (document.body.style.backgroundColor === "white") {
+          document.body.style.backgroundColor = "";
+          document.body.style.color = "";
+        } else {
+          document.body.style.backgroundColor = "white";
+          document.body.style.color = "#0b1220";
+        }
+      });
+
+      function handleSubmit(e) {
+        e.preventDefault();
+        const name = document.getElementById("name").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const message = document.getElementById("message").value.trim();
+        if (!name || !email || !message) {
+          alert("Please complete all fields.");
+          return false;
+        }
+        // For demo: show a friendly message. In production, integrate with email API or backend endpoint.
+        alert("Thanks " + name + "! Your message has been recorded (demo).");
+        e.target.reset();
+        return false;
+      }
+
+      // Simple keyboard accessibility: focus outlines on keyboard navigation
+      document.body.addEventListener("keydown", (e) => {
+        if (e.key === "Tab") document.body.classList.add("show-focus");
+      });
+
+      // Fade-in animations on scroll
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.1 });
+
+      document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    </script>
+  </body>
+</html>
